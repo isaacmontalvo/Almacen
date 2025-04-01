@@ -1,0 +1,20 @@
+tasks:
+  - name: PHP Server
+    init: |
+      mysql -u root -e "CREATE DATABASE almacen"
+      mysql -u root almacen < almacen.sql
+      composer install
+    command: |
+      php -S 0.0.0.0:8000
+
+ports:
+  - port: 8000
+    onOpen: open-preview
+  - port: 3306
+    onOpen: ignore
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true 

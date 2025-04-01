@@ -1,4 +1,4 @@
-# Sistema de Inventario desarrollado [por Isaac Montalvo]
+# Sistema de Inventario
 
 ## Descripción
 Sistema de gestión de inventario desarrollado en PHP que permite controlar el stock de productos, registrar entradas y salidas, gestionar códigos de barras y generar reportes en PDF.
@@ -21,101 +21,106 @@ Sistema de gestión de inventario desarrollado en PHP que permite controlar el s
 - Extensión PHP GD para generación de códigos de barras
 - Extensión PHP PDO para conexión a base de datos
 
-## Instalación
+## Instalación en PC de Control
 
-1. Clonar el repositorio:
-```bash
-git clone [URL_DEL_REPOSITORIO]
-cd [NOMBRE_DEL_DIRECTORIO]
-```
+1. Instalar XAMPP:
+   - Descargar desde: https://www.apachefriends.org/
+   - Instalar en la ruta por defecto (C:\xampp)
 
-2. Instalar dependencias:
-```bash
-composer install
-```
+2. Clonar el repositorio:
+   ```bash
+   cd C:\xampp\htdocs
+   git clone https://github.com/isaacmontalvo/Almacen.git
+   ```
 
-3. Configurar la base de datos:
-   - Crear una base de datos MySQL
-   - Importar el archivo `database.sql` que se encuentra en la carpeta `database/`
-   - Configurar las credenciales de la base de datos en `config/database.php`
+3. Instalar dependencias:
+   ```bash
+   cd Almacen
+   composer install
+   ```
 
-4. Configurar permisos:
-```bash
-chmod 755 -R assets/
-chmod 755 -R barcodes/
-chmod 755 -R pdfs/
-```
+4. Configurar la base de datos:
+   - Abrir phpMyAdmin (http://localhost/phpmyadmin)
+   - Crear base de datos "almacen"
+   - Importar el archivo `almacen.sql`
 
-5. Configurar el servidor web:
-   - Asegurarse que el DocumentRoot apunte a la carpeta `public/`
-   - Habilitar el módulo rewrite de Apache si se usa Apache
-   - Configurar el archivo `.htaccess` según sea necesario
+5. Configurar permisos:
+   - Dar permisos de escritura a las carpetas:
+     - barcodes/
+     - pdfs/
 
-## Estructura del Proyecto
-```
-├── assets/           # Archivos estáticos (CSS, JS, imágenes)
-├── barcodes/         # Códigos de barras generados
-├── config/           # Archivos de configuración
-├── database/         # Scripts de base de datos
-├── lib/              # Librerías y utilidades
-├── models/           # Modelos de datos
-├── pdfs/             # Reportes PDF generados
-├── public/           # Punto de entrada de la aplicación
-├── vendor/           # Dependencias de Composer
-└── views/            # Vistas y plantillas
-```
+6. Configurar el archivo de conexión:
+   - Editar `config/database.php`
+   - Verificar que los datos de conexión sean correctos
 
-## Uso del Sistema
+## Instalación en PC Cliente
 
-### Gestión de Productos
-1. Agregar nuevo producto:
-   - Ingresar Part Number, descripción, lote, cantidad y ubicación
-   - Opcionalmente asignar código de barras
-   - Guardar el producto
+1. Instalar XAMPP:
+   - Descargar desde: https://www.apachefriends.org/
+   - Instalar en la ruta por defecto (C:\xampp)
 
-2. Buscar productos:
-   - Usar el buscador por Part Number
-   - Aplicar filtros por ubicación, lote, etc.
-   - Ver detalles del producto incluyendo historial de movimientos
+2. Clonar el repositorio:
+   ```bash
+   cd C:\xampp\htdocs
+   git clone https://github.com/isaacmontalvo/Almacen.git
+   ```
 
-### Registro de Movimientos
-1. Registrar salida:
-   - Seleccionar producto
-   - Ingresar cantidad
-   - Proporcionar OT y matrícula
-   - Confirmar la salida
+3. Instalar dependencias:
+   ```bash
+   cd Almacen
+   composer install
+   ```
 
-2. Registrar devolución:
-   - Buscar el movimiento original
-   - Ingresar cantidad a devolver
-   - Proporcionar matrícula
-   - Confirmar la devolución
+4. Configurar la base de datos:
+   - Abrir phpMyAdmin (http://localhost/phpmyadmin)
+   - Crear base de datos "almacen"
+   - Importar el archivo `almacen.sql` más reciente
 
-### Generación de Reportes
-1. Reporte de producto:
-   - Acceder a detalles del producto
-   - Hacer clic en "Generar PDF"
-   - El reporte incluye información detallada y código de barras
+5. Configurar el archivo de conexión:
+   - Editar `config/database.php`
+   - Verificar que los datos de conexión sean correctos
 
-2. Reporte de inventario:
-   - Acceder a la sección de inventario
-   - Aplicar filtros si es necesario
-   - Generar reporte PDF
+## Actualización del Sistema
 
-3. Reporte de historial:
-   - Acceder a la sección de historial
-   - Aplicar filtros por fecha, producto, etc.
-   - Generar reporte PDF
+### En PC de Control
+1. Hacer cambios en el código
+2. Subir cambios a GitHub:
+   ```bash
+   git add .
+   git commit -m "Descripción del cambio"
+   git push
+   ```
+
+### En PC Cliente
+1. Actualizar código:
+   ```bash
+   cd C:\xampp\htdocs\Almacen
+   git pull
+   ```
+
+## Respaldo del Sistema
+
+### Respaldo Manual
+1. Ejecutar el script `backup.bat`
+2. El respaldo se guardará en la carpeta `backups/`
+3. Guardar el archivo ZIP generado en lugar seguro
+
+### Respaldo Automático (Programado)
+1. Abrir Programador de tareas de Windows
+2. Crear nueva tarea básica
+3. Configurar para ejecutar `backup.bat` diariamente
+4. Establecer hora de ejecución
 
 ## Mantenimiento
 
 ### Limpieza de Archivos Temporales
 - Los códigos de barras y PDFs generados se almacenan en sus respectivas carpetas
-- Se recomienda implementar un cron job para limpiar archivos antiguos
+- Se recomienda limpiar periódicamente archivos antiguos
 
 ### Respaldo de Base de Datos
-- Realizar respaldos periódicos de la base de datos
+- Realizar respaldos diarios
 - Mantener copias de seguridad en ubicación segura
+- Verificar periódicamente la integridad de los respaldos
 
 ## Soporte
 Para reportar problemas o solicitar ayuda:
@@ -123,5 +128,12 @@ Para reportar problemas o solicitar ayuda:
 2. Verificar los logs de error en `logs/`
 3. Contactar al administrador del sistema
 
+## Notas Importantes
+- Mantener actualizado el sistema
+- Realizar respaldos periódicos
+- No compartir credenciales de acceso
+- Mantener seguros los tokens de GitHub
+- Verificar la conexión a internet antes de actualizar
+
 ## Licencia
-Este proyecto está bajo la licencia [GPL]. Ver el archivo `LICENSE` para más detalles. 
+Este proyecto está bajo la licencia [TIPO_DE_LICENCIA]. Ver el archivo `LICENSE` para más detalles. 
