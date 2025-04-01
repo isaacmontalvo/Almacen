@@ -1,0 +1,33 @@
+# Archivos de configuración local
+config/database.php
+
+# Archivos temporales
+barcodes/*
+!barcodes/.gitkeep
+pdfs/*
+!pdfs/.gitkeep
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de dependencias
+/vendor/
+
+# Archivos de logs
+*.log
+
+# Archivos de caché
+*.cache
+
+.env
+.env.*
+!.env.example
+/barcodes/
+/pdf_output/ 
